@@ -10,24 +10,19 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 
 
-const home= require('./routes')
+const index= require('./routes/index')
+const gallery = require('./routes/gallery');
+const contact = require('./routes/contact');
 
 
 
 
 
-app.use('/home', home, ()=>{
-    res.send('Hello from home')
-})
+app.use('/index', index)
 
-app.use('/gallery', ()=>{
-    res.send('Hello from home')
-})
+app.use('/gallery', gallery)
 
-app.use('/contact', ()=>{
-    res.send('Hello from home')
-})
-
+app.use('/contact', contact)
 
 app.listen(3000,()=>{
     console.log('SERVER RUNNING')

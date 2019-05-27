@@ -1,5 +1,5 @@
-const express=require(express);
-const router = require(router)
+const express = require("express");
+const router = express.Router();
 
 // get home page
 router.get('/', (req, res)=>{
@@ -8,7 +8,7 @@ router.get('/', (req, res)=>{
 })
 
 // login to home page
-router.get('/login',()=>{
+router.get('/login',(req, res)=>{
     res.send('login page')
     // res.render('login')
 })
@@ -38,4 +38,6 @@ router.get('/logout',(req, res)=>{
 
 
 
-module.exports(router)
+
+
+module.exports= router;
