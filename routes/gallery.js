@@ -1,51 +1,58 @@
 const express = require('express');
 const router = express.Router();
 
+
+
+// pet gallery================
 router.get('/',(req, res)=>{
     res.send('gallery')
     // res.render('gallery')
 })
 
+// ==================================
 // form to submit pet
 router.get('/adopt',(req, res)=>{
     res.send('adopt')
     // res.render('/adopt')
 })
 
-// submission logic
+// logic
 
 router.post('/adopt',(req, res)=>{
-    res.send('post gallery')
-    // res.render('gallery')
+    res.send()
 })
-
+// ===================================
 // form to edit submission
 
-router.get('/pet/_:id/edit',(req, res)=>{
+router.get('/pet/:id/edit',(req, res)=>{
     res.send('edit pet route')
     // res.render('/edit')
 })
 
-// edit submission logic
-router.put('/pet/_:id/edit',(req, res)=>{
+//  logic
+router.put('/pet/:id/edit',(req, res)=>{
     res.send('edit pet logic')
     // res.render('/')
 })
-
+// ===========================================
 // form to comment on pet
-router.get('/pet/_:id/comment',(req, res)=>{
+router.get('/pet/:id/comment',(req, res)=>{
     res.send('comment ')
     // res.render('comment')
 });
 
-// form logic to comment on pet
-router.put('/pet/_:id/comment',(req, res)=>{
+// logic
+router.post('/pet/:id/comment',(req, res)=>{
     res.send('comment on pet route')
     // res.render('comment')
 });
 
+router.put('/pet/:id/comment/edit', (req, res)=>{
+    res.send('edit route')
+})
+// ===========================================
 // view pet
-router.get('/pet/_:id',(req, res)=>{
+router.get('/pet/:id',(req, res)=>{
     res.send('view pet route')
     // res.render('/pet/id')
 })

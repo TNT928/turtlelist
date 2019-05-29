@@ -1,11 +1,25 @@
 const express = require("express");
 const router = express.Router();
+const {postRegister} = require('../controllers/index');
 
 // get home page
 router.get('/', (req, res)=>{
     res.send('home page')
     // res.render('/home');
 })
+
+// ==============================
+
+// sign up 
+router.get('/signup', (req, res)=>{
+    res.send('sign up')
+})
+
+// logic
+router.post('/signup', postRegister)
+
+// ====================
+
 
 // login to home page
 router.get('/login',(req, res)=>{
@@ -14,12 +28,7 @@ router.get('/login',(req, res)=>{
 })
 
 // logic for login
-router.post('/login',(req, res)=>{
-    res.send('login logic')
-    // successRedirect:('/home')
-    // failureRedirect:('/login')
-  
-})
+router.post('/login',postRegister)
 
 // logout
 router.get('/logout',(req, res)=>{
