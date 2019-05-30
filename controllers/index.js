@@ -3,17 +3,13 @@ const User = require('../models/user');
 
 
 module.exports = {
-    postRegister(req, res, next){
-        User.register(new User({username: req.body.username}), req.body.password, function(err) {
-            if (err) {
-              console.log('error while user register!', err);
-              return next(err);
-            }
+   async postRegister(req, res, next){
+       const newUser = new User ({
+           username: req.body.username,
+           email: req.body.email
         
-            console.log('user registered!');
-        
-            res.redirect('/');
-          });
-    
+          })
+        await User.register( newUser, req.body.password)
+          
         }
 }
