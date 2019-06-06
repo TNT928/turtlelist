@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const {errorHandler} = require('../middleware')
+const {getPosts}= require('../controllers/gallery')
 
 
 
 // pet gallery================
-router.get('/',(req, res)=>{
-    res.send('gallery')
-    // res.render('gallery')
-})
+router.get('/',errorHandler(getPosts))
 
 // ==================================
 // form to submit pet
