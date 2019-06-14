@@ -1,0 +1,28 @@
+<h1>Edit Pet</h1>
+
+<form action="/gallery/pet/<%=post.id%>?_method=PUT" method="POST">
+
+<div>
+    <input type="text" name="post[name]" placeholder="Name" value="<%= post.name %>">
+</div>
+<div>
+    <input type="text" name="post[fee]" placeholder="Rehoming Fee" value="<%= post.fee %>">
+</div>
+<div>
+    <textarea name="post[description]"  placeholder="Description"><%= post.description %></textarea>
+</div>
+<div>
+    <input type="text" name="post[images]" placeholder="Images" value="<%= post.images %>">
+</div>
+<div>
+    <input type="submit">
+</div>
+
+
+
+
+
+
+
+</form>
+

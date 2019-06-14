@@ -1,1 +1,12 @@
 <h1>Pet Gallery!</h1>
+
+<% posts.forEach(function(post) { %>
+<div>
+<h1><%=post.name %></h1>
+<div><%=post.fee %></div>
+<div><%=post.description %></div>
+<div><a href="./pet/<%= post.id %>">View More</a></div>
+
+</div>
+ <% }) %>
+

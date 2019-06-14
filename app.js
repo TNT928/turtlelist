@@ -8,14 +8,16 @@ const User = require('./models/user')
 const index= require('./routes/index')
 const gallery = require('./routes/gallery');
 const contact = require('./routes/contact');
+const methodOverride = require('method-override')
 require('dotenv').config()
 const port =3000;
 
 
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
+app.use(methodOverride('_method'));
 
 
 
@@ -39,6 +41,7 @@ app.use(session({
 // connect to database
 mongoose.connect('mongodb://localhost:27017/turtlefarm', {useNewUrlParser: true});
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     email: String,
+    posts:{
+        type:Schema.Types.ObjectId,
+        ref: 'Post'
+    }
     
 });
 
