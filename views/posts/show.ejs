@@ -1,7 +1,109 @@
 <h1>show page</h1>
 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+    
+    <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+      
+            #map {
+             
+              width: 700px;
+              height: 400px;
+            }
+            .marker {
+                background-image: url('/images/mapbox-icon.png');
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+                }
+                .mapboxgl-popup {
+                max-width: 200px;
+                }
+
+                .mapboxgl-popup-content {
+                text-align: center;
+                font-family: 'Open Sans', sans-serif;
+                }
+          </style>
 
 <h1><%=post.name %></h1>
-<div><%=post.fee %></div>
+<div>Rehoming Fee:<%=post.fee %></div>
 <div><%=post.description %></div>
-<div><a href="./<%=post.id %>/edit">Edit Post</a></div>
+<div><%= post.location%></div>  
+<div>
+    <% post.images.forEach(function(image) { %>
+        <img src="<%=image.url %>" alt="Turtle Image" >
+        
+    <% }) %>
+
+</div>
+<div id='map'></div>
+<div><a href="./<%=post.id %>/edit">
+    <button>Edit</button>
+</a></div>
+
+<div>
+    <form action="./<%=post.id%>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete">
+    </form>
+</div>
+
+<script>
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiamVua2luczc0OCIsImEiOiJjang0M3VqMTIwNXIxM3ludmhleHo1ajNiIn0.Ns3b1H7AXfL7FH6Xd1vilw';
+        
+        var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/light-v10',
+          center: [-96, 37.8],
+          zoom: 3
+        });
+        var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-77.032, 38.913]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'Washington, D.C.'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.414, 37.776]
+    },
+    properties: {
+      title: 'Mapbox',
+      description: 'San Francisco, California'
+    }
+  }]
+ };
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+// create a HTML element for each feature
+var el = document.createElement('div');
+el.className = 'marker';
+
+// make a marker for each feature and add to the map
+new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+    .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+  .addTo(map);
+});
+        
+        
+        </script>

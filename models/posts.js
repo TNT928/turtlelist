@@ -5,7 +5,10 @@ const TurtleSchema = new Schema({
     name:String,
     fee:String,
     description: String,
-    images: [String],
+    location: String,
+    lat: Number,
+    lng: Number,
+    images: [{url:String, public_id:String}],
     author:{
         type: Schema.Types.ObjectId,
         ref:'User'

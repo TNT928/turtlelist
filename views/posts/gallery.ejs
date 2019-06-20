@@ -5,7 +5,8 @@
 <h1><%=post.name %></h1>
 <div><%=post.fee %></div>
 <div><%=post.description %></div>
-<div><a href="./pet/<%= post.id %>">View More</a></div>
+<div><%= post.location%></div>  
+<div><a href="/gallery/pet/<%=post.id %>">View More</a></div>
 
 </div>
  <% }) %>

@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {getPosts,newPet, 
+const multer= require('multer');
+const upload = multer({'dest': 'uploads/'});
+const {errorHandler} = require('../middleware')
+const {
+    getPosts,
+    newPet, 
     createPet, 
     editPet,
     petUpdate, 
@@ -8,8 +13,10 @@ const {getPosts,newPet,
     postComment,
      editComment,
     edit_pet_comment,
-    viewPet}= require('../controllers/gallery')
-const {errorHandler} = require('../middleware')
+    viewPet,
+    petDelete
+}= require('../controllers/gallery')
+
 
 
 
@@ -23,17 +30,19 @@ router.get('/adopt',newPet)
 
 // logic
 
-router.post('/',errorHandler (createPet));
+router.post('/',upload.array('images', 4), errorHandler (createPet));
 
 // show pet
-router.get('/pet/:id', errorHandler (viewPet))
+router.get('/pet/:id',errorHandler (viewPet))
 // ===================================
 // form to edit submission
 
 router.get('/pet/:id/edit', errorHandler (editPet))
 
 //  logic
-router.put('/pet/:id',petUpdate)
+router.put('/pet/:id',upload.array('images', 4), errorHandler (petUpdate))
+
+router.delete('/pet/:id', errorHandler(petDelete))
 // ===========================================
 // form to comment on pet
 router.get('/pet/:id/comment',petComment);
@@ -48,6 +57,8 @@ router.get('/pet/:id/comment/edit',edit_pet_comment)
 // logic
 router.put('/pet/:id/comment/edit', editComment)
 // ===========================================
+
+
 
 
 
